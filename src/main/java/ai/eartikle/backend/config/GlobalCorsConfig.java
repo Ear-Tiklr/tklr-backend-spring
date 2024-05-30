@@ -20,7 +20,7 @@ public class GlobalCorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOriginPatterns("http://localhost:3000", "https://example.com") // Replace with your actual allowed origins
+                        .allowedOriginPatterns("http://localhost:3000", "https://tiklr-next-custom-player.vercel.app", "http://eartiklr.com", "https://eartiklr.com") // Replace with your actual allowed origins
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true)
