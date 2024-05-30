@@ -20,6 +20,9 @@ import java.util.Optional;
 public class FavoriteService {
 
     @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
+
+    @Autowired
     private FavoriteRepository favoriteRepository;
 
     @Autowired
@@ -36,6 +39,8 @@ public class FavoriteService {
     }
 
     public Favorite saveFavorite(Favorite favorite) {
+        favorite.setId(sequenceGeneratorService.generateSequence(Favorite.SEQUENCE_NAME));
+
         return favoriteRepository.save(favorite);
     }
 

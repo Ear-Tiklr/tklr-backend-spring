@@ -9,6 +9,8 @@ import java.util.List;
 @Data
 @Document(collection = "playlists")
 public class Playlist {
+    public static final String SEQUENCE_NAME = "playlist_sequence";
+
     @Id
     private Long id;
     private Long creationDate;

@@ -20,6 +20,6 @@ public class MongoConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() {
-        return new MongoTemplate(mongoClient(), "mongoDbName");
+        return new MongoTemplate(mongoClient(), "musicPlayerDB");
     }
 }

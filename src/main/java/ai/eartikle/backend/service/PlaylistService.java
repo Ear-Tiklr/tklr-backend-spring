@@ -22,6 +22,9 @@ public class PlaylistService {
     private PlaylistRepository playlistRepository;
 
     @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
+
+    @Autowired
     private UserRepository userRepository;
 
     public Page<Playlist> getAllPlaylists(int page, int size) {
@@ -39,6 +42,8 @@ public class PlaylistService {
     }
 
     public Playlist savePlaylist(Playlist playlist) {
+        playlist.setId(sequenceGeneratorService.generateSequence(Playlist.SEQUENCE_NAME));
+
         return playlistRepository.save(playlist);
     }
 

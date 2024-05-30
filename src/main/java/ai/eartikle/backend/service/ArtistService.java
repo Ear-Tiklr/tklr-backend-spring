@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 public class ArtistService {
 
     @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
+
+    @Autowired
     private ArtistRepository artistRepository;
 
     public Page<Artist> getAllArtists(int page, int size) {
@@ -25,6 +28,7 @@ public class ArtistService {
     }
 
     public Artist saveArtist(Artist artist) {
+        artist.setId(sequenceGeneratorService.generateSequence(Artist.SEQUENCE_NAME));
         return artistRepository.save(artist);
     }
 

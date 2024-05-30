@@ -13,6 +13,7 @@ public class MusicController {
     @Autowired
     private MusicService musicService;
 
+
     @GetMapping
     public Page<Music> getAllMusics(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         return musicService.getAllMusics(page, size);

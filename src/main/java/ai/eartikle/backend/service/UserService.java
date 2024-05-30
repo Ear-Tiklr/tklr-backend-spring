@@ -19,6 +19,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
+
     public Page<User> getAllUsers(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return userRepository.findAll(pageable);
@@ -29,6 +32,7 @@ public class UserService {
     }
 
     public User saveUser(User user) {
+        user.setId(sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME));
         return userRepository.save(user);
     }
 

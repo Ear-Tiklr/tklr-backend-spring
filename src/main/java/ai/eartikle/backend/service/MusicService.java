@@ -1,6 +1,8 @@
 package ai.eartikle.backend.service;
 
+import ai.eartikle.backend.mongo.entity.Artist;
 import ai.eartikle.backend.mongo.entity.Music;
+import ai.eartikle.backend.mongo.repository.ArtistRepository;
 import ai.eartikle.backend.mongo.repository.MusicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,12 +11,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MusicService {
 
 
     @Autowired
     private MusicRepository musicRepository;
+
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
+
+
+    @Autowired
+    private ArtistRepository artistRepository;
 
     public Page<Music> getAllMusics(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
@@ -26,7 +37,14 @@ public class MusicService {
     }
 
     public Music saveMusic(Music music) {
-        return musicRepository.save(music);
+        Optional<Artist> byId = artistRepository.findById(music.getArtistId());
+        if(byId.isEmpty()) throw new RuntimeException("Artist not found");
+        Artist artist = byId.get();
+        music.setId(sequenceGeneratorService.generateSequence(Music.SEQUENCE_NAME));
+        Music saved = musicRepository.save(music);
+        artist.getMusics().add(saved);
+        artistRepository.save(artist);
+        return saved;
     }
 
     public void deleteMusic(Long id) {
