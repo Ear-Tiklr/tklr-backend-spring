@@ -15,8 +15,8 @@ public class MusicController {
 
 
     @GetMapping
-    public Page<Music> getAllMusics(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "100") int size) {
-        return musicService.getAllMusics(page, size);
+    public Page<Music> getAllMusics(@RequestParam(required = false) String query, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "100") int size) {
+        return musicService.getAllMusics(page, size, query);
     }
 
     @GetMapping("/{id}")
@@ -25,7 +25,6 @@ public class MusicController {
     }
 
     @PostMapping
-    @PutMapping
     public Music createMusic(@RequestBody Music music) {
         return musicService.saveMusic(music);
     }

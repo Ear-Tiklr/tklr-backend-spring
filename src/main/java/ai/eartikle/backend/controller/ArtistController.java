@@ -24,7 +24,6 @@ public class ArtistController {
     }
 
     @PostMapping
-    @PutMapping
     public Artist createArtist(@RequestBody Artist artist) {
         return artistService.saveArtist(artist);
     }

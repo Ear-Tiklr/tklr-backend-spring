@@ -28,7 +28,6 @@ public class UserController {
     }
 
     @PostMapping
-    @PutMapping
     public User createUser(@RequestBody User user) {
         return userService.saveUser(user, null);
     }

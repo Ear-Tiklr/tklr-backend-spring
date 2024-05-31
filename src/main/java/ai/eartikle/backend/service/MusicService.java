@@ -27,8 +27,11 @@ public class MusicService {
     @Autowired
     private ArtistRepository artistRepository;
 
-    public Page<Music> getAllMusics(int page, int size) {
+    public Page<Music> getAllMusics(int page, int size, String query) {
         Pageable pageable = PageRequest.of(page, size);
+        if(query !=null && !query.isEmpty()) {
+            return musicRepository.findByNameContainingIgnoreCase(query, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "playedCount")));
+        }
         return musicRepository.findAll(pageable);
     }
 
@@ -54,6 +57,11 @@ public class MusicService {
     public Page<Music> getTopMusics(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "playedCount"));
         return musicRepository.findAll(pageable);
+    }
+
+    public Page<Music> findMusicByQueryString(String query, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "playedCount"));
+        return musicRepository.findByNameContainingIgnoreCase(query, pageable);
     }
 
     public Page<Music> getTrends(int page, int size) {
