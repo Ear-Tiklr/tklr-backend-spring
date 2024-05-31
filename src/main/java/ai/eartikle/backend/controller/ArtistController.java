@@ -14,7 +14,7 @@ public class ArtistController {
     private ArtistService artistService;
 
     @GetMapping
-    public Page<Artist> getAllArtists(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+    public Page<Artist> getAllArtists(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "100") int size) {
         return artistService.getAllArtists(page, size);
     }
 

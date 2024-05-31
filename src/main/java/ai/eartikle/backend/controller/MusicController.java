@@ -15,7 +15,7 @@ public class MusicController {
 
 
     @GetMapping
-    public Page<Music> getAllMusics(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+    public Page<Music> getAllMusics(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "100") int size) {
         return musicService.getAllMusics(page, size);
     }
 
@@ -41,12 +41,12 @@ public class MusicController {
     }
 
     @GetMapping("/top-musics")
-    public Page<Music> getTopMusics(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+    public Page<Music> getTopMusics(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
         return musicService.getTopMusics(page, size);
     }
 
     @GetMapping("/trends")
-    public Page<Music> getTrends(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+    public Page<Music> getTrends(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
         return musicService.getTrends(page, size);
     }
 }

@@ -18,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public Page<User> getAllUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+    public Page<User> getAllUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "100") int size) {
         return userService.getAllUsers(page, size);
     }
 
