@@ -31,7 +31,8 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User saveUser(User user) {
+    public User saveUser(User user, Long id) {
+        if(id == null)
         user.setId(sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME));
         return userRepository.save(user);
     }

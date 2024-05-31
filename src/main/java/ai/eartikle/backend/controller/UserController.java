@@ -30,11 +30,12 @@ public class UserController {
     @PostMapping
     @PutMapping
     public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+        return userService.saveUser(user, null);
     }
+
     @PutMapping("/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        return userService.saveUser(user);
+        return userService.saveUser(user, id);
     }
 
     @DeleteMapping("/{id}")
